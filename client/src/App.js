@@ -1,11 +1,17 @@
 import React from 'react';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { Provider } from 'react-redux';
+// import store from './store';
+import Main from './pages/Main/Main';
 import './App.css';
 
 function App() {
   return (
-    <div>
-      <h1>This is my application</h1>
-    </div>
+    // <Provider store={store}>
+    <Router>
+      <Route path="/" component={Main} />
+    </Router>
+    // </Provider>
   );
 }
 
