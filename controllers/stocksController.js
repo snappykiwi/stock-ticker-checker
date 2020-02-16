@@ -10,9 +10,7 @@ module.exports = {
 
   create: function (req, res) {
     db.Stock.create(req.body)
-      .then(dbStock => {
-        console.log(dbStock);
-      })
+      .then(dbStock => res.json(dbStock))
       .catch(err => res.status(500).json(err))
   },
 
