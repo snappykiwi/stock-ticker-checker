@@ -4,7 +4,7 @@ import M from 'materialize-css/dist/js/materialize.min.js'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-// import store from './store';
+import store from './js/store';
 import Main from './pages/Main/Main';
 import './App.css';
 
@@ -15,11 +15,11 @@ const App = () => {
   });
 
   return (
-    // <Provider store={store}>
-    <Router>
-      <Route path="/" component={Main} />
-    </Router>
-    // </Provider>
+    <Provider store={store}>
+      <Router>
+        <Route path="/" component={Main} />
+      </Router>
+    </Provider>
   );
 }
 
