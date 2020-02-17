@@ -4,7 +4,7 @@ import M from 'materialize-css/dist/js/materialize.min.js'
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './js/store';
+import store from './store';
 import Main from './pages/Main/Main';
 import './App.css';
 

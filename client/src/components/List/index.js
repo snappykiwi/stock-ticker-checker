@@ -1,37 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import API from '../../utils/API'
+import React, { useEffect } from 'react';
+import { ProgressBar, Collection, CollectionItem } from 'react-materialize';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { addStock, getStocks } from '../../actions';
 
-const List = () => {
-
-  const [stocks, setStocks] = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  const getStocks = async () => {
-    setLoading(true);
-    let dbStocks = await API.getStocks();
-    let stockData = await dbStocks.data;
-
-    setStocks(stockData);
-    setLoading(false);
-  }
+const List = ({ stock: { stocks, loading }, getStocks }) => {
 
   useEffect(() => {
-    getStocks();
+    getStocks()
+    // eslint-disable-next-line
   }, []);
 
 
   if (loading) {
-    return <h4>Loading...</h4>
+    return <ProgressBar />
   }
 
   return (
-    <ul>
+    <Collection>
       {stocks.map(stock =>
-        <li key={stock._id}>{stock.symbol} - {stock.price}</li>
+        <CollectionItem key={stock._id}>{stock.symbol} <span className="secondary-content">${stock.price}</span></CollectionItem>
       )}
-    </ul>
+    </Collection>
   )
-
 }
 
-export default List;
+List.propTypes = {
+  stock: PropTypes.object.isRequired
+}
+
+const mapStateToProps = state => ({
+  stock: state.stock //state.stock comes from root reducer naming
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    getStocks,
+    addStock
+  }
+)(List);

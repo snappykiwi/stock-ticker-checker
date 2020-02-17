@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { addStock } from '../../actions';
 import { Row, Col, TextInput, Button } from 'react-materialize';
 import './styles.css';
 import API from '../../utils/API';
 
-const Searchbar = () => {
+const Searchbar = ({ addStock }) => {
 
 
   const [searchTerm, changeSearch] = useState("");
@@ -18,8 +20,9 @@ const Searchbar = () => {
         if (res.data[0]) {
           API.addStock(res.data[0])
             .then(res => {
-              console.log(res);
+              console.log(res.data);
               changeSearch("");
+              addStock(res.data)
             })
             .catch(err => { console.log(err); });
         }
@@ -33,8 +36,6 @@ const Searchbar = () => {
   const enter = (event) => {
     event.persist();
     if (event.which === 13) {
-      console.log(searchTerm);
-
       getStockPrice(searchTerm);
     }
   };
@@ -52,4 +53,7 @@ const Searchbar = () => {
 
 }
 
-export default Searchbar;
+export default connect(
+  null,
+  { addStock }
+)(Searchbar);
