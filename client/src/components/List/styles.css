@@ -1,0 +1,7 @@
+i.material-icons.menu-icon {
+  margin-left: 2rem;
+}
+
+li.collection-item:nth-child(even) {
+  background-color: lightgray;
+}

@@ -9,6 +9,7 @@ const Searchbar = ({ addStock }) => {
 
 
   const [searchTerm, changeSearch] = useState("");
+  const [invalidSearch, isInvalid] = useState(false);
 
 
   const getStockPrice = (symbol) => {
@@ -18,6 +19,7 @@ const Searchbar = ({ addStock }) => {
         console.log(res.data[0]);
 
         if (res.data[0]) {
+          isInvalid(false);
           API.addStock(res.data[0])
             .then(res => {
               console.log(res.data);
@@ -27,6 +29,7 @@ const Searchbar = ({ addStock }) => {
             .catch(err => { console.log(err); });
         }
         else {
+          isInvalid(true);
           console.log("not a valid stock symbol");
         }
 
@@ -44,11 +47,20 @@ const Searchbar = ({ addStock }) => {
   return (
 
     <Row className="searchRow">
-      <Col className="search" s={12} m={8} l={6} offset="l3 m2">
-        <TextInput value={searchTerm} onChange={event => { changeSearch(event.target.value) }} onKeyPress={enter} s={12} m={8}></TextInput>
+
+      <Col className="search center" s={12} m={8} l={6} offset="l3 m2">
+
+        <TextInput s={12} name="ticker" id="searchInput" placeholder={"Ticker Symbol"} value={searchTerm} onChange={event => { changeSearch(event.target.value) }} onKeyPress={enter}></TextInput>
+        {invalidSearch ? (<label className="red-text inputLabel">Invalid Ticker Symbol</label>) :
+          (<label className="inputLabel">Search by ticker symbol to get latest stock price</label>)}
+      </Col>
+
+      <Col className="center">
         <Button onClick={() => getStockPrice(searchTerm)} className="blue" small={true}>Search</Button>
       </Col>
+
     </Row>
+
   )
 
 }
