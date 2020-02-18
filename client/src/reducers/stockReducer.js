@@ -26,15 +26,29 @@ const stockApp = (state = initialState, action) => {
         error: action.payload
       }
     case ADD_STOCK:
-      return Object.assign({}, state, {
-        stocks: [
-          {
-            symbol: action.payload.symbol,
-            price: action.payload.price
-          },
-          ...state.stocks
-        ]
-      });
+      let found = state.stocks.find(({ symbol }) => symbol === action.payload.symbol)
+      if (!found) {
+        // returns new object for state with stocks overwriting original value
+        return Object.assign({}, state, {
+          stocks: [
+            action.payload,
+            ...state.stocks
+          ]
+        });
+      }
+      else {
+        return Object.assign({}, state, {
+          stocks: state.stocks.map((stock) => {
+            if (stock.symbol === action.payload.symbol) {
+              console.log(stock);
+              return Object.assign({}, stock, {
+                price: action.payload.price
+              })
+            }
+            return stock
+          })
+        })
+      }
     default:
       return state;
   }

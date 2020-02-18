@@ -4,12 +4,21 @@ const Schema = mongoose.Schema;
 const stockSchema = new Schema({
   symbol: {
     type: String
-    // required: true
   },
   price: {
     type: String
-    // required: true
-  }
+  },
+  time: {
+    type: Number
+  },
+  pastStats: [{
+    price: {
+      type: Number
+    },
+    time: {
+      type: Number
+    }
+  }]
 });
 
 const Stock = mongoose.model("Stock", stockSchema);
