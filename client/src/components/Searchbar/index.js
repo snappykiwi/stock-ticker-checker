@@ -1,32 +1,60 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { addStock } from '../../actions';
+import PropTypes from 'prop-types';
+import { addStock, updateStock } from '../../actions';
 import { Row, Col, TextInput, Button } from 'react-materialize';
 import './styles.css';
 import API from '../../utils/API';
 
-const Searchbar = ({ addStock }) => {
+const Searchbar = ({ stock: { stocks }, addStock, updateStock }) => {
 
 
   const [searchTerm, changeSearch] = useState("");
   const [invalidSearch, isInvalid] = useState(false);
 
+  // tells which action should be taken for stock
+  const addOrUpdate = (stockToAdd, action) => {
+    API.addStock(stockToAdd).then(res => {
+      changeSearch("");
+      if (action === "add") {
+        console.log("creating new stock")
+        addStock(res.data);
+      }
+      else {
+        console.log("Updating stock")
+        updateStock(res.data)
+      }
+    }).catch(err => { console.log(err); })
+  }
 
+  // Checks to determine if stock symbol already exists and if price has changed
+  const checkStock = (searchSymbol, APIRes) => {
+    let found = stocks.find(({ symbol }) => symbol === searchSymbol.toUpperCase());
+
+    if (!!found) {
+      if (found.price === APIRes.price.toString()) {
+        console.log("price is unchanged");
+      }
+      else {
+        addOrUpdate(APIRes, "update");
+      }
+    }
+    else {
+      addOrUpdate(APIRes, "add");
+    }
+
+  }
+
+  // Gets most recent price of stock from API and calls checkStock function
   const getStockPrice = (symbol) => {
 
     API.getStockPrice(symbol)
       .then((res) => {
-        console.log(res.data[0]);
+        let stockInfo = res.data[0];
 
-        if (res.data[0]) {
+        if (stockInfo) {
           isInvalid(false);
-          API.addStock(res.data[0])
-            .then(res => {
-              console.log(res.data);
-              changeSearch("");
-              addStock(res.data)
-            })
-            .catch(err => { console.log(err); });
+          checkStock(symbol, stockInfo);
         }
         else {
           isInvalid(true);
@@ -36,6 +64,7 @@ const Searchbar = ({ addStock }) => {
       }).catch((err) => { console.log(err); })
   };
 
+  // submits search on enter key being pressed
   const enter = (event) => {
     event.persist();
     if (event.which === 13) {
@@ -65,7 +94,17 @@ const Searchbar = ({ addStock }) => {
 
 }
 
+Searchbar.propTypes = {
+  stock: PropTypes.object.isRequired,
+  addStock: PropTypes.func.isRequired,
+  updateStock: PropTypes.func.isRequired
+}
+
+const mapStateToProps = state => ({
+  stock: state.stock
+});
+
 export default connect(
-  null,
-  { addStock }
+  mapStateToProps,
+  { addStock, updateStock }
 )(Searchbar);

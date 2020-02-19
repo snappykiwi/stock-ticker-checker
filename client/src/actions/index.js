@@ -1,4 +1,4 @@
-import { SET_LOADING, GET_STOCKS, ADD_STOCK, STOCKS_ERROR } from './types';
+import { SET_LOADING, GET_STOCKS, ADD_STOCK, UPDATE_STOCK, STOCKS_ERROR } from './types';
 import API from '../utils/API';
 
 
@@ -28,6 +28,11 @@ export const getStocks = () => async dispatch => {
 // ADDS STOCK
 export const addStock = (payload) => {
   return { type: ADD_STOCK, payload };
+};
+
+// UPDATES STOCK'S PRICE
+export const updateStock = (payload) => {
+  return { type: UPDATE_STOCK, payload }
 };
 
 // SETS LOADING

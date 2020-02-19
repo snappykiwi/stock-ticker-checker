@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { ProgressBar, Collection, CollectionItem, Icon } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { addStock, getStocks } from '../../actions';
+import { getStocks } from '../../actions';
 import './styles.css'
 
 const List = ({ stock: { stocks, loading }, getStocks }) => {
@@ -36,7 +36,8 @@ const List = ({ stock: { stocks, loading }, getStocks }) => {
 }
 
 List.propTypes = {
-  stock: PropTypes.object.isRequired
+  stock: PropTypes.object.isRequired,
+  getStocks: PropTypes.func.isRequired,
 }
 
 const mapStateToProps = state => ({
@@ -46,7 +47,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    getStocks,
-    addStock
+    getStocks
   }
 )(List);
