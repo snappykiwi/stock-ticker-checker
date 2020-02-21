@@ -1,0 +1,12 @@
+li.stockListItem:nth-child(even) div.collapsible-header {
+  background-color: rgb(245, 245, 245);
+}
+
+span.stockPrice {
+  margin-left: auto;
+}
+
+span.chartDisclaimer {
+  font-size: smaller;
+  color: rgb(75, 75, 75)
+}

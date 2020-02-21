@@ -1,5 +1,6 @@
 i.material-icons.menu-icon {
   margin-left: 2rem;
+  font-size: 1.1rem;
 }
 
 li.collection-item:nth-child(even) {

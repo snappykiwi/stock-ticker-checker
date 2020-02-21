@@ -5,7 +5,7 @@ module.exports = {
   findAll: function (req, res) {
     //sends only the symbol and price fields from the db
     db.Stock.find({},
-      { symbol: 1, price: 1 }
+      // { symbol: 1, price: 1 }
     ).sort({ symbol: 1 })
       .then(dbStocks => res.json(dbStocks))
       .catch(err => res.status(500).json(err))

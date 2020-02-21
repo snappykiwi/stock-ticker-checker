@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addStock, updateStock } from '../../actions';
 import { Row, Col, TextInput, Button } from 'react-materialize';
+import M from 'materialize-css/dist/js/materialize.min.js'
 import './styles.css';
 import API from '../../utils/API';
 
@@ -32,7 +33,8 @@ const Searchbar = ({ stock: { stocks }, addStock, updateStock }) => {
     let found = stocks.find(({ symbol }) => symbol === searchSymbol.toUpperCase());
 
     if (!!found) {
-      if (found.price === APIRes.price.toString()) {
+      if (found.price === APIRes.price) {
+        M.toast({ html: `The price of ${searchSymbol.toUpperCase()} has not changed` });
         console.log("price is unchanged");
       }
       else {

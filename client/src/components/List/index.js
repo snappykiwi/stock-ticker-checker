@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
-import { ProgressBar, Collection, CollectionItem, Icon } from 'react-materialize';
+import { ProgressBar, Collapsible } from 'react-materialize';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getStocks } from '../../actions';
+import PopoutItem from '../PopoutItem';
+import 'materialize-css/dist/css/materialize.min.css';
 import './styles.css'
 
 const List = ({ stock: { stocks, loading }, getStocks }) => {
@@ -18,20 +20,19 @@ const List = ({ stock: { stocks, loading }, getStocks }) => {
   }
 
   return (
-    <Collection header="Stocks">
+    <div>
 
-      {(!loading && !stocks.length) ?
-        <CollectionItem>No Stocks Yet, Search by Ticker Symbol to Get Latest Price</CollectionItem> :
+      <Collapsible accordion id="stockList">
 
-        (stocks.map(stock =>
-          <CollectionItem key={stock._id}>{stock.symbol}
-            <span className="secondary-content">${stock.price}
-              <Icon tiny className="menu-icon">more_vert</Icon>
-            </span></CollectionItem>)
-        )
-      }
+        {(!loading && !stocks.length) ?
+          <h4>No Stocks Yet, Search by Ticker Symbol to Get Latest Price</h4> :
 
-    </Collection>
+          (stocks.map(stock =>
+            <PopoutItem key={stock._id} stockData={stock}></PopoutItem>))
+        }
+      </Collapsible>
+
+    </div>
   )
 }
 
