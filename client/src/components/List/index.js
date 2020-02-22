@@ -14,7 +14,6 @@ const List = ({ stock: { stocks, loading }, getStocks }) => {
     // eslint-disable-next-line
   }, []);
 
-
   if (loading) {
     return <ProgressBar />
   }
@@ -23,9 +22,8 @@ const List = ({ stock: { stocks, loading }, getStocks }) => {
     <div>
 
       <Collapsible accordion id="stockList">
-
         {(!loading && !stocks.length) ?
-          <h4>No Stocks Yet, Search by Ticker Symbol to Get Latest Price</h4> :
+          <h4 className="noStocks center">No Stocks Yet, Search by Ticker Symbol to Get Latest Price</h4> :
 
           (stocks.map(stock =>
             <PopoutItem key={stock._id} stockData={stock}></PopoutItem>))

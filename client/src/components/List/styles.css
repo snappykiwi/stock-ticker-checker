@@ -6,3 +6,7 @@ i.material-icons.menu-icon {
 li.collection-item:nth-child(even) {
   background-color: lightgray;
 }
+
+h4.noStocks {
+  padding: 2rem;
+}

@@ -19,7 +19,7 @@ export const getStocks = () => async dispatch => {
   } catch (error) {
     dispatch({
       type: STOCKS_ERROR,
-      payload: error.response.data
+      payload: error
     })
   }
 
@@ -37,10 +37,8 @@ export const updateStock = (payload) => {
 
 export const removeStock = (id) => async dispatch => {
   try {
-    console.log(`removing ${id}`);
     let removedStock = await API.removeStock(id);
     let removedId = await removedStock.data._id;
-    console.log(removedStock);
 
     dispatch({
       type: REMOVE_STOCK,

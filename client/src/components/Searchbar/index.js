@@ -38,6 +38,13 @@ const Searchbar = ({ stock: { stocks }, addStock, updateStock }) => {
         console.log("price is unchanged");
       }
       else {
+        if (found.price > APIRes.price) {
+          console.log("price has decreased");
+        }
+        else {
+          console.log("price has increased")
+        }
+
         addOrUpdate(APIRes, "update");
       }
     }

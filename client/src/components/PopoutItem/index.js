@@ -1,20 +1,23 @@
 import React from 'react';
-import Chart from '../Chart';
 import { connect } from 'react-redux';
 import { removeStock } from '../../actions';
 import PropTypes from 'prop-types';
 import { Icon, Button } from 'react-materialize'
+import Chart from '../Chart';
+import TrendIcon from '../TrendIcon';
 import './styles.css'
 
 
 const PopoutItem = ({ stockData, removeStock }) => {
   return (
 
-    <li className="stockListItem">
-      <div onClick={() => { console.log(stockData._id) }} className="collapsible-header active"><i className="material-icons">show_chart</i>
+    <li className={`stockListItem ${stockData.current ? "active" : ""}`}>
+      <div className="collapsible-header active"><i className="material-icons">show_chart</i>
         <span className="stockSymbol">{stockData.symbol}</span>
         <span className="stockPrice indigo-text text-darken-4 secondary-content">${stockData.price}
-          {}
+
+          <TrendIcon stockTrend={stockData.stockTrend}></TrendIcon>
+
         </span>
       </div>
       <div className="collapsible-body">

@@ -13,9 +13,21 @@ const stockApp = (state = initialState, action) => {
     case GET_STOCKS:
       return {
         ...state,
-        stocks: action.payload,
+        stocks: action.payload.map((stock) => {
+          let stockTrend = 0;
+          const lastPriceIndex = stock.pastStats.length - 2
+          if (lastPriceIndex >= 0) {
+            stockTrend = stock.price - stock.pastStats[lastPriceIndex].price;
+          }
+
+          return {
+            ...stock,
+            stockTrend
+          };
+
+        }),
         loading: false
-      }
+      };
     case SET_LOADING:
       return {
         ...state,
@@ -27,41 +39,48 @@ const stockApp = (state = initialState, action) => {
         error: action.payload
       }
     case ADD_STOCK:
-      // returns new object for state with stocks overwriting original value
-      return Object.assign({}, state, {
+      return {
+        ...state,
         stocks: [{
           ...action.payload,
+          stockTrend: 0,
           current: true
         },
         ...state.stocks
         ]
-      })
+      }
     case UPDATE_STOCK:
       //if state already has a stock value for that symbol, updates price
-      return Object.assign({}, state, {
+      return {
+        ...state,
         stocks: state.stocks.map((stock) => {
+          let stockTrend = action.payload.price - stock.price;
+          console.log(stockTrend);
 
           if (stock.symbol === action.payload.symbol) {
-            return Object.assign({}, stock, {
+            return {
+              ...stock,
               price: action.payload.price,
-              current: true
-            })
+              current: true,
+              stockTrend
+            }
           }
-          return Object.assign({}, stock, {
+          return {
+            ...stock,
             current: false
-          });
+          };
         })
-      });
+      };
     case REMOVE_STOCK:
-      return Object.assign({}, state, {
+      return {
+        ...state,
+        // eslint-disable-next-line
         stocks: state.stocks.filter((stock) => {
-          console.log(stock._id === action.id);
-          console.log(action);
           if (stock._id !== action.id) {
             return stock
           }
         })
-      })
+      }
     default:
       return state;
   }
