@@ -4,7 +4,9 @@ module.exports = {
 
   findAll: function (req, res) {
     //sends only the symbol and price fields from the db
-    db.Stock.find({},
+    db.Stock.find({
+      show: true
+    }
       // { symbol: 1, price: 1 }
     ).sort({ symbol: 1 })
       .then(dbStocks => res.json(dbStocks))
@@ -21,14 +23,11 @@ module.exports = {
       symbol: req.body.symbol
     }, {
       ...newPrice,
-      $push: {
+      show: true,
+      $addToSet: {
         pastStats: newPrice
       }
     }, {
-      projection: {
-        symbol: 1,
-        price: 1
-      },
       new: true,
       upsert: true
     })
@@ -36,16 +35,23 @@ module.exports = {
       .catch(err => res.status(500).json(err))
   },
 
-  update: function (req, res) {
-    db.Stock.findByIdAndUpdate(req.params.id)
-      .then(dbStock => res.json(dbStock))
-      .catch(err => res.status(500).json(err))
-  },
+  remove: function (req, res) {
+    db.Stock.findByIdAndUpdate(req.params.id,
+      {
+        show: false
+      }, {
+      new: true
+    },
+      function (err, response) {
+        console.log(response);
 
-  delete: function (req, res) {
-    db.Stock.findByIdAndRemove(req.params.id, function (req, res) {
-      console.log(res);
-    }).catch(err => res.status(500).json(err))
+        if (err) {
+          return res.status(500).json(err);
+        }
+        else {
+          return res.json(response);
+        }
+      })
   }
 
 }

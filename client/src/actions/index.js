@@ -1,4 +1,4 @@
-import { SET_LOADING, GET_STOCKS, ADD_STOCK, UPDATE_STOCK, STOCKS_ERROR } from './types';
+import { GET_STOCKS, ADD_STOCK, UPDATE_STOCK, REMOVE_STOCK, SET_LOADING, STOCKS_ERROR } from './types';
 import API from '../utils/API';
 
 
@@ -34,6 +34,27 @@ export const addStock = (payload) => {
 export const updateStock = (payload) => {
   return { type: UPDATE_STOCK, payload }
 };
+
+export const removeStock = (id) => async dispatch => {
+  try {
+    console.log(`removing ${id}`);
+    let removedStock = await API.removeStock(id);
+    let removedId = await removedStock.data._id;
+    console.log(removedStock);
+
+    dispatch({
+      type: REMOVE_STOCK,
+      id: removedId
+    })
+
+  }
+  catch (error) {
+    dispatch({
+      type: STOCKS_ERROR,
+      payload: error
+    })
+  }
+}
 
 // SETS LOADING
 export const setLoading = () => {

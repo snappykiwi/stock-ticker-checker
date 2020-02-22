@@ -1,4 +1,4 @@
-import { ADD_STOCK, GET_STOCKS, SET_LOADING, STOCKS_ERROR, UPDATE_STOCK } from '../actions/types';
+import { ADD_STOCK, GET_STOCKS, SET_LOADING, STOCKS_ERROR, UPDATE_STOCK, REMOVE_STOCK } from '../actions/types';
 
 const initialState = {
   stocks: [],
@@ -49,10 +49,19 @@ const stockApp = (state = initialState, action) => {
           }
           return Object.assign({}, stock, {
             current: false
-          })
+          });
+        })
+      });
+    case REMOVE_STOCK:
+      return Object.assign({}, state, {
+        stocks: state.stocks.filter((stock) => {
+          console.log(stock._id === action.id);
+          console.log(action);
+          if (stock._id !== action.id) {
+            return stock
+          }
         })
       })
-
     default:
       return state;
   }

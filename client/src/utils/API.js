@@ -12,6 +12,9 @@ export default {
 
   addStock: (stock) => {
     return axios.post('api/stocks', stock);
-  }
+  },
 
+  removeStock: (id) => {
+    return axios.put(`api/stocks/${id}`)
+  }
 }

@@ -11,6 +11,9 @@ const stockSchema = new Schema({
   time: {
     type: Number
   },
+  show: {
+    type: Boolean
+  },
   pastStats: [{
     price: {
       type: Number

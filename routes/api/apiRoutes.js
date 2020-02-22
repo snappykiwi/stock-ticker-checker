@@ -6,7 +6,6 @@ router.route("/")
   .post(stocksController.create);
 
 router.route("/:id")
-  .put(stocksController.update)
-  .delete(stocksController.delete);
+  .put(stocksController.remove);
 
 module.exports = router;

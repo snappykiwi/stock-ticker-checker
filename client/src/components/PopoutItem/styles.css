@@ -6,7 +6,7 @@ span.stockPrice {
   margin-left: auto;
 }
 
-span.chartDisclaimer {
+p.chartDisclaimer {
   font-size: smaller;
   color: rgb(75, 75, 75)
 }
