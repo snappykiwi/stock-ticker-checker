@@ -1,5 +1,6 @@
 import React from 'react';
 import { Chart } from 'react-google-charts';
+import * as moment from 'moment';
 
 
 const stockChart = ({ chartData: { symbol, pastStats } }) => {
@@ -9,7 +10,8 @@ const stockChart = ({ chartData: { symbol, pastStats } }) => {
   ];
 
   pastStats.forEach(stock => {
-    let stockData = [stock.time, stock.price];
+    let time = moment(stock.time).format('lll');
+    let stockData = [time, stock.price];
 
     data.push(stockData);
   });
