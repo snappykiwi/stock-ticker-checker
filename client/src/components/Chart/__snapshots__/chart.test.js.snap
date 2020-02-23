@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`expects to render the Chart component 1`] = `ShallowWrapper {}`;
+
+exports[`expects to render the Chart component 2`] = `ShallowWrapper {}`;

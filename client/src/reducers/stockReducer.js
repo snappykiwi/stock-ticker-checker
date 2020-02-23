@@ -1,8 +1,8 @@
-import { ADD_STOCK, GET_STOCKS, SET_LOADING, STOCKS_ERROR, UPDATE_STOCK, REMOVE_STOCK } from '../actions/types';
+import { ADD_STOCK, GET_STOCKS, STOCKS_ERROR, UPDATE_STOCK, REMOVE_STOCK } from '../actions/types';
 
 const initialState = {
   stocks: [],
-  loading: false,
+  loading: true,
   error: null
 };
 
@@ -27,11 +27,6 @@ const stockApp = (state = initialState, action) => {
 
         }),
         loading: false
-      };
-    case SET_LOADING:
-      return {
-        ...state,
-        loading: true
       };
     case STOCKS_ERROR:
       return {

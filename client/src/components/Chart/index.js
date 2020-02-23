@@ -2,7 +2,7 @@ import React from 'react';
 import { Chart } from 'react-google-charts';
 
 
-const stockChart = ({ chartData: { symbol, price, pastStats } }) => {
+const stockChart = ({ chartData: { symbol, pastStats } }) => {
 
   const data = [
     ["Time", "Price"],

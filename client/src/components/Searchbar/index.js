@@ -18,11 +18,11 @@ const Searchbar = ({ stock: { stocks }, addStock, updateStock }) => {
     API.addStock(stockToAdd).then(res => {
       changeSearch("");
       if (action === "add") {
-        console.log("creating new stock")
+        console.log("creating new stock");
         addStock(res.data);
       }
       else {
-        console.log("Updating stock")
+        console.log("Updating stock");
         updateStock(res.data)
       }
     }).catch(err => { console.log(err); })
@@ -94,7 +94,7 @@ const Searchbar = ({ stock: { stocks }, addStock, updateStock }) => {
       </Col>
 
       <Col className="center">
-        <Button onClick={() => getStockPrice(searchTerm)} className="blue" small={true}>Search</Button>
+        <Button onClick={() => getStockPrice(searchTerm)} className="cyan darken-4" small={true}>Search</Button>
       </Col>
 
     </Row>

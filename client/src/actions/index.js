@@ -1,4 +1,4 @@
-import { GET_STOCKS, ADD_STOCK, UPDATE_STOCK, REMOVE_STOCK, SET_LOADING, STOCKS_ERROR } from './types';
+import { GET_STOCKS, ADD_STOCK, UPDATE_STOCK, REMOVE_STOCK, STOCKS_ERROR } from './types';
 import API from '../utils/API';
 
 
@@ -6,7 +6,6 @@ import API from '../utils/API';
 export const getStocks = () => async dispatch => {
 
   try {
-    setLoading();
 
     let dbStocks = await API.getStocks();
     let stockData = await dbStocks.data;
@@ -54,7 +53,3 @@ export const removeStock = (id) => async dispatch => {
   }
 }
 
-// SETS LOADING
-export const setLoading = () => {
-  return { type: SET_LOADING }
-};
