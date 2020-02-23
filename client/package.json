@@ -47,5 +47,8 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "expect": "^25.1.0",
     "react-test-renderer": "^16.12.0"
+  },
+  "engines": {
+    "node": "12.4.0"
   }
 }
