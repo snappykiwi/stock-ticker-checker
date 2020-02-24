@@ -7,7 +7,7 @@ const Nav = () => {
     <Navbar
       className="cyan darken-4"
       alignLinks="left"
-      brand={<span className="brand-logo">Stockeez</span>}
+      brand={<span className="brand-logo">STOCKEEZ</span>}
       centerLogo
     ></Navbar>
   )

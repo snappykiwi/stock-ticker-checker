@@ -13,6 +13,7 @@ const PopoutItem = ({ stockData, removeStock }) => {
   return (
 
     <li className={`stockListItem ${stockData.current ? "active" : ""}`}>
+
       <div className="collapsible-header active">
         <i className="material-icons">show_chart</i>
         <span className="stockSymbol">
@@ -24,6 +25,7 @@ const PopoutItem = ({ stockData, removeStock }) => {
           <TrendIcon stockTrend={stockData.stockTrend}></TrendIcon>
         </span>
       </div>
+
       <div className="collapsible-body">
         <Button onClick={() => { removeStock(stockData._id, API) }}
           className="red lighten-2 removeStock right" small node="button" waves="light"
@@ -35,6 +37,7 @@ const PopoutItem = ({ stockData, removeStock }) => {
           This chart is based off of values of this stock when it has been actively checked and may not be fully indicative of trends
         </p>
       </div>
+
     </li>
 
   )

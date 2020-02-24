@@ -2,6 +2,11 @@ li.stockListItem:nth-child(even) div.collapsible-header {
   background-color: rgb(245, 245, 245);
 }
 
+span.stockSymbol {
+  font-weight: 600;
+  margin-top: 7px;
+}
+
 span.stockPrice {
   margin-left: auto;
 }

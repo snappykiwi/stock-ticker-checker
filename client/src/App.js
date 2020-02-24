@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import store from './store';
 import Main from './pages/Main/Main';
+import Nav from './components/Nav';
 import './App.css';
 
 const App = () => {
@@ -16,6 +17,7 @@ const App = () => {
 
   return (
     <Provider store={store}>
+      <Nav></Nav>
       <Router>
         <Route path="/" component={Main} />
       </Router>

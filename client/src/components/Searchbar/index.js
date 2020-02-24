@@ -18,11 +18,9 @@ const Searchbar = ({ stock: { stocks }, addStock, updateStock }) => {
     API.addStock(stockToAdd).then(res => {
       changeSearch("");
       if (action === "add") {
-        console.log("creating new stock");
         addStock(res.data);
       }
       else {
-        console.log("Updating stock");
         updateStock(res.data)
       }
     }).catch(err => { console.log(err); })
@@ -35,16 +33,8 @@ const Searchbar = ({ stock: { stocks }, addStock, updateStock }) => {
     if (!!found) {
       if (found.price === APIRes.price) {
         M.toast({ html: `The price of ${searchSymbol.toUpperCase()} has not changed` });
-        console.log("price is unchanged");
       }
       else {
-        if (found.price > APIRes.price) {
-          console.log("price has decreased");
-        }
-        else {
-          console.log("price has increased")
-        }
-
         addOrUpdate(APIRes, "update");
       }
     }
@@ -67,7 +57,6 @@ const Searchbar = ({ stock: { stocks }, addStock, updateStock }) => {
         }
         else {
           isInvalid(true);
-          console.log("not a valid stock symbol");
         }
 
       }).catch((err) => { console.log(err); })

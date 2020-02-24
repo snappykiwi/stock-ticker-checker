@@ -29,8 +29,4 @@ describe('expected results for actions', () => {
     expect(actions.updateStock(mockStock)).toEqual(expectedAction);
   });
 
-  it('should create an action for getting stocks', () => {
-
-
-  })
 });

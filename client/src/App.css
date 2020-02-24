@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css?family=Abel&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Federant&display=swap');
+body {
+  font-family: 'Abel';
+}
+
+span.brand-logo {
+  font-family: 'Federant';
+}

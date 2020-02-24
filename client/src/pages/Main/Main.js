@@ -11,7 +11,6 @@ class Main extends Component {
   render() {
     return (
       <>
-        <Nav></Nav>
         <Container>
           <Searchbar></Searchbar>
           <List></List>
